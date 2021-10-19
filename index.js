@@ -29,6 +29,6 @@ http.createServer(function (req, res) {
     //console.log(requestURL)
     req.pipe(request(requestURL)).pipe(res)
   }
-}).listen(8081);
+}).listen(80);
 
-console.log('http://localhost:8081/')
+console.log('http://localhost:80/')

@@ -1,31 +1,34 @@
 const http = require('http');
 const request = require('request');
 
+const PoundSetup = require('./app/PoundSetup.js')
+PoundSetup()
+
+const config = require('./mount/config.js')
+const route = require('./app/RouteLoader.js')
+
 http.createServer(function (req, res) {
-    if (req.url.startsWith('/303/')) {
-        // http://pulipuli.myqnapcloud.com:30380/
-        // proxy random image from picsum website
-        let uri = req.url.slice(5)
+  for (let i = 0; i < route.length; i++) {
+    let {uri, backend} = route[i]
+    
+    if (req.url.startsWith(uri)) {
+        let requestURI = req.url.slice(uri.length)
         
-        let baseOrigin = 'http://pulipuli.myqnapcloud.com:30380/';
-        let requestURL = baseOrigin + uri
-        console.log(requestURL)
-        req.pipe(request(requestURL)).pipe(res);
-    } 
-    else if (req.url.startsWith('/t/')) {
-        // http://pulipuli.myqnapcloud.com:30380/
-        // proxy random image from picsum website
-        let uri = req.url.slice(3)
-        
-        let baseOrigin = 'http://127.0.0.1:3000/';
-        let requestURL = baseOrigin + uri
-        console.log(requestURL)
-        req.pipe(request(requestURL)).pipe(res);
+      let requestURL = backend + requestURI
+      //console.log(requestURL)
+      req.pipe(request(requestURL)).pipe(res)
+      return true
     }
-    else {
-        // default page with image tag that renders random image
-        res.setHeader('Content-type', 'text/html');
-        res.write(`<img src="/random-image/${Math.random()}" />`);
-        res.end();
-    }
-}).listen(8080);
+  }
+  
+  if (config.enablePound) {
+    
+    let uri = req.url.slice(1)
+    let baseOrigin = 'http://127.0.0.1:8080/';
+    let requestURL = baseOrigin + uri
+    //console.log(requestURL)
+    req.pipe(request(requestURL)).pipe(res)
+  }
+}).listen(8081);
+
+console.log('http://localhost:8081/')

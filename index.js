@@ -17,7 +17,13 @@ http.createServer(function (req, res) {
 
         let requestURL = backend + requestURI
         //console.log(requestURL)
-        req.pipe(request(requestURL)).pipe(res)
+        req.pipe(request(requestURL), function(error, response, body){
+    if (error.code === 'ECONNREFUSED'){
+      console.error('Refused connection');
+    } else { 
+      throw error; 
+    }
+  }).pipe(res)
         return true
       }
     }
@@ -28,7 +34,13 @@ http.createServer(function (req, res) {
       let baseOrigin = 'http://127.0.0.1:8080/';
       let requestURL = baseOrigin + uri
       //console.log(requestURL)
-      req.pipe(request(requestURL)).pipe(res)
+      req.pipe(request(requestURL), function(error, response, body){
+    if (error.code === 'ECONNREFUSED'){
+      console.error('Refused connection');
+    } else { 
+      throw error; 
+    }
+  }).pipe(res)
     }
   }
   catch (e) {

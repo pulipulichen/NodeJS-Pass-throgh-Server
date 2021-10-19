@@ -1,0 +1,25 @@
+{
+  "name": "nodejs-pass-throgh-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "static": "nodemon static.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pulipulichen/NodeJS-Pass-throgh-Server.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pulipulichen/NodeJS-Pass-throgh-Server/issues"
+  },
+  "homepage": "https://github.com/pulipulichen/NodeJS-Pass-throgh-Server#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.14",
+    "request": "^2.88.2"
+  }
+}

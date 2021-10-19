@@ -21,7 +21,8 @@ http.createServer(function (req, res) {
     if (error.code === 'ECONNREFUSED'){
       console.error('Refused connection');
     } else { 
-      throw error; 
+      //throw error; 
+      console.error(error)
     }
   }).pipe(res)
         return true
@@ -38,7 +39,8 @@ http.createServer(function (req, res) {
     if (error.code === 'ECONNREFUSED'){
       console.error('Refused connection');
     } else { 
-      throw error; 
+      //throw error; 
+      console.error(error)
     }
   }).pipe(res)
     }

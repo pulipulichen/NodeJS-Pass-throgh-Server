@@ -55,6 +55,10 @@ http.createServer(function (req, res) {
   catch (e) {
     console.error(e)
   }
+  
+  req.on('error', function(e) {
+    console.error(e);
+  });
 }).listen(80);
 
 console.log('http://localhost:80/')

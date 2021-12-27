@@ -51,10 +51,10 @@ http.createServer(function (req, res) {
     }
     else {
       // https://stackoverflow.com/questions/11355366/how-to-redirect-users-browser-url-to-a-different-page-in-nodejs
-      res.writeHead(301,
-        {Location: 'https://blog.pulipuli.info/'}
-      );
-      res.end();
+      //res.writeHead(301,
+      //  {Location: 'https://blog.pulipuli.info/'}
+      //);
+      res.end('');
     }
   }
   catch (e) {

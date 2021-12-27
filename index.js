@@ -28,6 +28,7 @@ http.createServer(function (req, res) {
             console.error(error)
           }
         }).pipe(res)
+        res.end('')
         return true
       }
     }
@@ -39,14 +40,16 @@ http.createServer(function (req, res) {
       let requestURL = baseOrigin + uri
       //console.log(requestURL)
       req.pipe(request(requestURL).on('error', function(e) {
-        console.error(e);
+        res.ende);
       }), function(error, response, body){
     if (error.code === 'ECONNREFUSED'){
-      console.error('Refused connection');
+      res.end('Refused connection');
     } else { 
       //throw error; 
-      console.error(error)
+      res.end(error)
     }
+    
+    res.end('')
   }).pipe(res)
     }
     else {
@@ -58,11 +61,11 @@ http.createServer(function (req, res) {
     }
   }
   catch (e) {
-    console.error(e)
+    res.end(e)
   }
   
   req.on('error', function(e) {
-    console.error(e);
+    res.end(e);
   });
 }).listen(80);
 

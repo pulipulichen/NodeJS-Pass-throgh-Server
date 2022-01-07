@@ -53,7 +53,7 @@ http.createServer(function (req, res) {
       res.end(error)
     }
     
-    res.end('')
+    //res.end('')
   }).pipe(res)
     }
     else {

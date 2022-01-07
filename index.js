@@ -8,7 +8,7 @@ const config = require('./mount/config.js')
 const route = require('./app/RouteLoader.js')
 
 http.createServer(function (req, res) {
-  
+  console.log(req.url)
   try {
     for (let i = 0; i < route.length; i++) {
       let {uri, backend} = route[i]

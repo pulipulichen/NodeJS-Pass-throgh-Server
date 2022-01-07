@@ -7,6 +7,8 @@ PoundSetup()
 const config = require('./mount/config.js')
 const route = require('./app/RouteLoader.js')
 
+console.log(route)
+
 http.createServer(function (req, res) {
   console.log(req.url)
   try {

@@ -30,7 +30,9 @@ http.createServer(function (req, res) {
             console.error(error)
           }
         }).pipe(res)
-        res.end('')
+        
+        //res.end('')
+        
         return true
       }
     }

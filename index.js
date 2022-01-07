@@ -40,7 +40,7 @@ http.createServer(function (req, res) {
       let requestURL = baseOrigin + uri
       //console.log(requestURL)
       req.pipe(request(requestURL).on('error', function(e) {
-        res.ende);
+        console.error(e);
       }), function(error, response, body){
     if (error.code === 'ECONNREFUSED'){
       res.end('Refused connection');

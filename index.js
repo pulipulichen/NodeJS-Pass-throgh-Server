@@ -19,7 +19,7 @@ http.createServer(function (req, res) {
         let requestURI = req.url.slice(uri.length)
 
         let requestURL = backend + requestURI
-        //console.log(requestURL)
+        console.log('requestURL', requestURL)
         req.pipe(request(requestURL).on('error', function(e) {
             console.error(e);
           }), function(error, response, body){

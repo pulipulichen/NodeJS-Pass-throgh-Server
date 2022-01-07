@@ -10,7 +10,7 @@ const route = require('./app/RouteLoader.js')
 console.log(route)
 
 http.createServer(function (req, res) {
-  console.log(req.url)
+  //console.log(req.url)
   try {
     for (let i = 0; i < route.length; i++) {
       let {uri, backend} = route[i]
@@ -19,7 +19,7 @@ http.createServer(function (req, res) {
         let requestURI = req.url.slice(uri.length)
 
         let requestURL = backend + requestURI
-        console.log('requestURL', requestURL)
+        //console.log('requestURL', requestURL)
         req.pipe(request(requestURL).on('error', function(e) {
             console.error(e);
           }), function(error, response, body){

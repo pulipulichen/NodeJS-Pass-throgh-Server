@@ -9,6 +9,6 @@ module.exports = [
   },
   {
     uri: '304',
-    backend: 'http://localhost:3000/'
+    backend: 'http://pulipuli.myqnapcloud.com:30480/'
   }
 ]

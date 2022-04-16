@@ -7,6 +7,7 @@ function sleep(ms = 500) {
 }
 
 let fs = require('fs')
+let path = require('path')
 
 let restartServer = function () {
   let content = JSON.stringify({

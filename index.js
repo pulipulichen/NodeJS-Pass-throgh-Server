@@ -9,6 +9,8 @@ const route = require('./app/RouteLoader.js')
 
 console.log(route)
 
+const restarter = require('./try-to-restart-server.js')
+
 http.createServer(function (req, res) {
   //console.log(req.url)
   try {
@@ -20,19 +22,22 @@ http.createServer(function (req, res) {
 
         let requestURL = backend + requestURI
         //console.log('requestURL', requestURL)
-        req.pipe(request(requestURL).on('error', function(e) {
+        req.pipe(request(requestURL).on('error', (e) => {
+            restarter(true)
             console.error(e);
-          }), function(error, response, body){
+          }), (error, response, body) => {
           if (error.code === 'ECONNREFUSED'){
+            restarter(true)
             console.error('Refused connection');
           } else { 
             //throw error; 
+            restarter(true)
             console.error(error)
           }
         }).pipe(res)
         
         //res.end('')
-        
+        restarter(false)
         return true
       }
     }
@@ -47,9 +52,11 @@ http.createServer(function (req, res) {
         console.error(e);
       }), function(error, response, body){
     if (error.code === 'ECONNREFUSED'){
+      restarter(true)
       res.end('Refused connection');
     } else { 
       //throw error; 
+      restarter(true)
       res.end(error)
     }
     
@@ -61,14 +68,17 @@ http.createServer(function (req, res) {
       //res.writeHead(301,
       //  {Location: 'https://blog.pulipuli.info/'}
       //);
+      restarter(true)
       res.end('');
     }
   }
   catch (e) {
+    restarter(true)
     res.end(e)
   }
   
   req.on('error', function(e) {
+    restarter(true)
     res.end(e);
   });
 }).listen(80);

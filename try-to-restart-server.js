@@ -1,6 +1,6 @@
 /* global path, __dirname */
 
-let counter = 10
+let counter = 100
 
 function sleep(ms = 500) {
   return new Promise(resolve => setTimeout(resolve, ms));
@@ -11,7 +11,7 @@ let path = require('path')
 
 let restartServer = function () {
   let content = JSON.stringify({
-    date: (new Date()).getTime()
+    date: (new Date()) + ''
   })
   console.log(content)
   console.log('restart server...')
@@ -30,8 +30,8 @@ module.exports = async function (isError = true) {
   }
   else {
     counter++
-    if (counter > 10) {
-      counter = 10
+    if (counter > 100) {
+      counter = 100
     }
   }
 }

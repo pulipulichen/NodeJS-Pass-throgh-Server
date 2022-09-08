@@ -11,6 +11,20 @@ console.log(route)
 
 const restarter = require('./try-to-restart-server.js')
 
+
+// ---------
+
+const fs = require('fs')
+const path = require('path')
+
+let resolve = fs.readFileSync('/etc/resolv.conf', 'utf-8')
+if (resolve.indexOf('nameserver 8.8.8.8') === -1) {
+  resolve = resolve + '\nnameserver 8.8.8.8'
+  fs.writeFileSync('/etc/resolv.conf', resolve, 'utf-8')
+}
+
+// ---------
+
 http.createServer(function (req, res) {
   //console.log(req.url)
   try {
@@ -84,3 +98,4 @@ http.createServer(function (req, res) {
 }).listen(80);
 
 console.log('http://localhost:80/')
+
